@@ -1,0 +1,26 @@
+{
+  "name": "library-express",
+  "description": "Library application based on ExpressJS",
+  "main": "app.js",
+  "authors": [
+    "Chinga Chaguluka"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "library",
+    "expressjs",
+    "express"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}
