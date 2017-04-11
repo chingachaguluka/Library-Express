@@ -5,12 +5,13 @@ var app = express();
 var port = process.env.PORT || 5000;
 
 app.use(express.static('public'));
-app.use(express.static('src/views'));
+app.set('views', './src/views');
 
-//gets a response on the particular path - home and return a message in the send to
-//the browser
+app.set('view engine', 'ejs');
+
+//gets a response on the particular path - home and render a template
 app.get('/', function(req,res){
-    res.send('Welcome to home page');
+    res.render('index', {title: 'Welcome to Home in EJS', list: ['a', 'b', 'c']});
 });
 
 //gets a response on the particular path - home and return a message in the send to
