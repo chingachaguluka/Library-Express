@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 
 var port = process.env.PORT || 5000;
+var bookRouter = express.Router();
 
 app.use(express.static('public'));
 app.set('views', './src/views');
@@ -18,6 +19,18 @@ app.get('/', function(req,res) {
             {Link: '/Books', Title:'Books'}]
     });
 });
+
+bookRouter.route('/')
+    .get(function(req, res) {
+        res.send('This is the books listing');
+    });
+
+bookRouter.route('/Single')
+    .get(function(req, res) {
+        res.send('This is the book view page');
+    });
+
+app.use('/Books', bookRouter);
 
 //gets a response on the particular path - home and return a message in the send to
 //the browser
