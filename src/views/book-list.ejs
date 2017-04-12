@@ -33,7 +33,7 @@
 <body>
 
 <div class="wrapper">
-    <div class="sidebar" data-background-color="white" data-active-color="danger">
+	<div class="sidebar" data-background-color="white" data-active-color="danger">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -64,10 +64,11 @@
                 <%}%>        
 			</ul>
     	</div>
+
     </div>
 
     <div class="main-panel">
-        <nav class="navbar navbar-default">
+		<nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle">
@@ -76,7 +77,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dashboard</a>
+                    <a class="navbar-brand" href="#">Book List</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -117,69 +118,47 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-md-12">
                         <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Books List</p>
-                                            2
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-calendar"></i> Laest Book
-                                    </div>
-                                </div>
+                            <div class="header">
+                                <h4 class="title">All Books</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                    	<th>Genre</th>
+                                    	<th>Author</th>
+                                    	<th>Read</th>
+                                    </thead>
+                                    <tbody>
+                                        <%for(var cnt=0; cnt < books.length; cnt++){%>
+                                            <tr>
+                                                <td><%=books[cnt].id%></td>
+                                                <td><%=books[cnt].title%></td>
+                                                <td><%=books[cnt].genre%></td>
+                                                <td><%=books[cnt].author%></td>
+                                                <td><%=books[cnt].read%></td>
+                                            </tr>
+                                        <%}%>
+                                        
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-info text-center">
-                                            <i class="ti-twitter-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Authors</p>
-                                            2
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> View Latest
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
-                
             </div>
         </div>
-
 
         <footer class="footer">
             <div class="container-fluid">
                 
 				<div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, <a href="http://www.evancc.biz">Evancc Solutions</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.evancc.biz">Evancc Solutions</a>
                 </div>
             </div>
         </footer>
