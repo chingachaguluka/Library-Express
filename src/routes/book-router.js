@@ -45,16 +45,14 @@ var routes = function(nav) {
     bookRouter.route('/:id')
         .get(function(req, res) {
             var id = req.params.id;
-            console.log(id);
             var ps = new sql.PreparedStatement();
             ps.input('id', sql.VarChar(50));
             ps.prepare('select * from books where id = @id', function(err) {
                 ps.execute({id: id}, function(err, recordset) {
-                    console.log(recordset.recordset);
                     res.render('book-view',  {nav: nav, book: recordset.recordset[0]});
                 });
             });
         });
     return bookRouter;
-}
+};
 module.exports = routes;
