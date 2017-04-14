@@ -50,7 +50,7 @@ var routes = function(nav) {
             ps.prepare('select * from books where id = @id', function(err) {
                 ps.execute({id: id}, function(err, recordset) {
                     if (!recordset) {
-                        res.status(404).send('Not found');
+                        res.status(404).send('Book not found');
                     }
                     else {
                         req.book = recordset.recordset[0];
