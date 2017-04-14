@@ -43,15 +43,24 @@ var routes = function(nav) {
         });
 
     bookRouter.route('/:id')
-        .get(function(req, res) {
+        .all(function (req, res, next) {
             var id = req.params.id;
             var ps = new sql.PreparedStatement();
             ps.input('id', sql.VarChar(50));
             ps.prepare('select * from books where id = @id', function(err) {
                 ps.execute({id: id}, function(err, recordset) {
-                    res.render('book-view',  {nav: nav, book: recordset.recordset[0]});
+                    if (!recordset) {
+                        res.status(404).send('Not found');
+                    }
+                    else {
+                        req.book = recordset.recordset[0];
+                        next();
+                    }
                 });
             });
+        })
+        .get(function(req, res) {
+            res.render('book-view',  {nav: nav, book: req.book});
         });
     return bookRouter;
 };
