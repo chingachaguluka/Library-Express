@@ -1,4 +1,5 @@
 var express = require('express');
+var sql = require('mssql');
 
 var bookRouter = express.Router();
 
@@ -26,23 +27,34 @@ var books = [
     }
 ];
 
-bookRouter.route('/')
-    .get(function(req, res) {
-        res.render('book-list',  {nav: [
-            {Link: '/Books', Title:'Books'},
-            {Link: '/Authors', Title: 'Authors'}],
-                books: books
-            });
-    });
+var routes = function(nav) {
 
-bookRouter.route('/:id')
-    .get(function(req, res) {
-        var id = req.params.id;
-        res.render('book-view',  {nav: [
-            {Link: '/Books', Title:'Books'},
-            {Link: '/Authors', Title: 'Authors'}],
-                book: books[id]
+    bookRouter.route('/')
+        .get(function(req, res) {
+            var request = new sql.Request();
+            request.query('select * from books', function(err, recordset) {
+                console.log(recordset.recordset);
+                res.render('book-list', {nav: nav, books: recordset.recordset});
             });
-    });
 
-module.exports = bookRouter;
+            //new sql.Request().query('select * from books', function(err, results) {
+            //    console.dir(results);
+            //});
+        });
+
+    bookRouter.route('/:id')
+        .get(function(req, res) {
+            var id = req.params.id;
+            console.log(id);
+            var ps = new sql.PreparedStatement();
+            ps.input('id', sql.VarChar(50));
+            ps.prepare('select * from books where id = @id', function(err) {
+                ps.execute({id: id}, function(err, recordset) {
+                    console.log(recordset.recordset);
+                    res.render('book-view',  {nav: nav, book: recordset.recordset[0]});
+                });
+            });
+        });
+    return bookRouter;
+}
+module.exports = routes;
