@@ -1,5 +1,6 @@
 var express = require('express');
 var mongodb = require('mongodb').MongoClient;
+var objectId = require('mongodb').ObjectID;
 
 var bookRouter = express.Router();
 
@@ -21,8 +22,16 @@ var router = function(nav) {
 
     bookRouter.route('/:id')
         .get(function(req, res) {
-            var id = req.params.id;
-            res.render('book-view',  {nav: nav, book: books[id]});
+            var id = new objectId(req.params.id);
+            var url = 'mongodb://localhost:27017/Library';
+
+            mongodb.connect(url, function(err, db) {
+                var collection = db.collection('Books');
+                collection.findOne({_id: id}, function(err, results) {
+                    console.log(results);
+                    res.render('book-view',  {nav: nav, book: results});
+                });
+            });
         });
 
     //return the current route that is slected
