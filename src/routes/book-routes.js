@@ -7,6 +7,13 @@ var bookRouter = express.Router();
 
 //exported function to manage routes for the books
 var router = function(nav) {
+    //redirect users to the index route when they are not logged in
+    bookRouter.use(function(req, res, next){
+        if (!req.user) {
+            res.redirect('/');
+        }
+    });
+
     bookRouter.route('/')
         .get(function(req, res) {
 
