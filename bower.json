@@ -1,6 +1,6 @@
 {
-  "name": "library-express",
-  "description": "Library application based on ExpressJS",
+  "name": "system-request-express",
+  "description": "System request management application based on ExpressJS",
   "main": "app.js",
   "authors": [
     "Chinga Chaguluka"

@@ -6,7 +6,8 @@ var session = require('express-session');
 
 var app = express();
 
-var port = process.env.PORT || 5000;
+//var port = process.env.PORT || 5000;
+var port = 5000;
 
 //section to include all middle ware being usd in the project
 app.use(express.static('public'));
